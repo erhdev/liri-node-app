@@ -6,6 +6,8 @@ var subject = process.argv[3]
 var Spotify = require('node-spotify-api')
 var spotify = new Spotify(keys.spotify)
 var axios = require('axios')
+let OMBD = 'http://www.omdbapi.com/?apikey=' + keys.omdb.id + '&q=' + subject
+let BITown = "https://rest.bandsintown.com/artists/" + subject + "/events?app_id=codingbootcamp"
 switch (apiCall) {
     case 'spotify-this-song' :
         spotify.search({ type: 'track', query: subject}, function(err, courier) {
@@ -21,9 +23,14 @@ switch (apiCall) {
         })
     break;
     case 'movie-this':
-    let OMBD = 'http://www.omdbapi.com/?apikey=' + keys.omdb.id + '&q=' + subject
+
         axios.get(OMBD).then(function (courier) {
             console.log(courier.res)
+        })
+    break;
+    case 'concert-this' :
+        axios.get(BITown).then(function(courier) {
+            console.log(courier)
         })
     break;
 }
