@@ -1,6 +1,5 @@
-# liri-node-app
-# Every institution on the internet is waging a war for human attention, and their weapons are lethal. 
-This app is designed to let you gather information and program distraction free. 
+# liri-node-app 
+# This app is designed to let you gather information and program distraction free. 
 
 
 Programmers do their best work in focused, exclusive time blocks free from any disruption. 
@@ -17,11 +16,11 @@ pull the information straight to the terminal, without any of the perils of swim
 Check out the video below to see how it works!
 
 <a href="https://www.youtube.com/watch?v=wYAPC-3ClhY&feature=youtu.be" target="_blank">
-<img src="http://img.youtube.com/vi/v=wYAPC-3ClhY/100.jpg" 
+<img src="Video_Thumbnail.jpg" 
 width="240" height="180"/></a>
 
 The app also has the functionality to handle empty requests, which will pull from a preset search request. 
 
-![The Spotify request will bring up Kero Kero Bonito's 'Trampoline'.](./spotify-empty-request)
-![The movie request will pull up 'Detective Pikachu'.](./omdb-empty-request)
-![The concert request will pull up BROCKHAMPTON'S tour dates](./concert-empty-request)
+![The Spotify request will bring up Kero Kero Bonito's 'Trampoline'.](./spotify-empty-request.jpg)
+![The movie request will pull up 'Detective Pikachu'.](./omdb-empty-request.jpg)
+![The concert request will pull up BROCKHAMPTON'S tour dates](./concert-empty-request.jpg)
