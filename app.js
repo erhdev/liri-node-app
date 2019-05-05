@@ -7,36 +7,27 @@ var Spotify = require('node-spotify-api')
 var spotify = new Spotify(keys.spotify)
 var axios = require('axios')
 let moment = require('moment')
-switch (apiCall) {
-    case 'spotify-this-song' :
+let fs = require('fs')
+
+function spotifySong() {
     if (typeof subject === 'undefined') {
-        subject = ''
+        subject = 'Trampoline Kero Kero Bonito'
     }
-        spotify.search({ type: 'track', query: subject, limit: 5}, function(err, courier) {
+        spotify.search({ type: 'track', query: subject, limit: 1}, function(err, courier) {
             if (!err) {
-            for (let i = 0; i < 5; i++) {
-            if (i < 4) {
-                console.log
+               console.log
                 (
-                courier.tracks.items[i].name.toUpperCase() + '\n----------\n' +
-                'Artist: ' + courier.tracks.items[i].artists[i].name + '\n' +
-                'Album: '  + courier.tracks.items[i].album.name + '\n' +
-                'Listen: ' + courier.tracks.items[i].preview_url + '\n' +
-                'Possibly you were looking for:' + '\n\n'             
+                courier.tracks.items[0].name.toUpperCase() + '\n----------\n' +
+                'Artist: ' + courier.tracks.items[0].artists[0].name + '\n' +
+                'Album: '  + courier.tracks.items[0].album.name + '\n' +
+                'Listen: ' + courier.tracks.items[0].preview_url + '\n' +
+                'For the best results, enter the artist as well.' + '\n\n'             
                 ) 
-            }else {
-                console.log
-                (
-                courier.tracks.items[i].name.toUpperCase() + '\n----------\n' +
-                'Artist: ' + courier.tracks.items[i].artists[i].name + '\n' +
-                'Album: '  + courier.tracks.items[i].album.name + '\n' +
-                'Listen: ' + courier.tracks.items[i].preview_url + '\n'                        
-                ) 
-            }}
+            
             } else {console.log(err)}
         })
-    break;
-    case 'movie-this':
+}
+function OMDB() {
     if (typeof subject === 'undefined') {
         
         subject = 'Detective Pikachu'
@@ -58,9 +49,9 @@ switch (apiCall) {
 
     })
     
-        
-    break;
-    case 'concert-this' :
+       
+}
+function Concert() {
     if (typeof subject === 'undefined') {
         subject = 'BROCKHAMPTON'
     }
@@ -71,5 +62,31 @@ switch (apiCall) {
             console.log(`${courier.data[i].venue.name}, in ${courier.data[i].venue.city}, ${courier.data[i].venue.country} on ${moment(courier.data[i].datetime).format('MMMM Do YYYY')}` + '\n')
             }
         })
+}
+switch (apiCall) {
+    case 'spotify-this-song' :
+        spotifySong();
+    break;
+    case 'movie-this':
+        OMDB();
+    break;
+    case 'concert-this' :
+        Concert();
+    break;
+    case 'do-what-it-says' :
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        var blocks = data.split(',')
+        console.log(blocks[0])
+        subject = blocks[1]
+        if (blocks[0]  === 'spotify-this-song') {
+            spotifySong();
+        }
+        if (blocks[0] === 'movie-this') {
+            OMDB();
+        }
+        if (blocks[0] === 'concert-this') {
+            Concert();
+        }
+    })
     break;
 }
